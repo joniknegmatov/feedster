@@ -4,10 +4,10 @@ import io.jonibek.TestObjects
 import io.jonibek.feedster.data.datasource.comment.CommentRepository
 import io.jonibek.feedster.data.datasource.post.PostRepository
 import io.jonibek.feedster.data.datasource.user.UserRepository
-import io.jonibek.feedster.data.pojo.Comment
-import io.jonibek.feedster.data.pojo.Post
-import io.jonibek.feedster.data.pojo.User
-import io.jonibek.feedster.domain.BaseUseCase
+import io.jonibek.feedster.data.entities.Comment
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.data.entities.User
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.jonibek.feedster.domain.post.PostUseCase
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -42,7 +42,7 @@ class PostUseCaseTest {
         )
 
 
-        postUseCaseUnderTest.getCommentsByPostId(1, object : BaseUseCase.Callback<List<Comment>> {
+        postUseCaseUnderTest.getCommentsByPostId(1, object : UseCaseCallback<List<Comment>> {
             override fun onResult(result: List<Comment>) {
                 assertTrue(comments.size == result.size)
             }
@@ -51,7 +51,7 @@ class PostUseCaseTest {
             }
         })
 
-        postUseCaseUnderTest.getUserById(1, object : BaseUseCase.Callback<User> {
+        postUseCaseUnderTest.getUserById(1, object : UseCaseCallback<User> {
             override fun onResult(result: User) {
                 assertTrue(user == result)
             }
@@ -60,7 +60,7 @@ class PostUseCaseTest {
             }
         })
 
-        postUseCaseUnderTest.getPostById(1, object : BaseUseCase.Callback<Post> {
+        postUseCaseUnderTest.getPostById(1, object : UseCaseCallback<Post> {
             override fun onResult(result: Post) {
                 assertTrue(post == result)
             }
@@ -88,7 +88,7 @@ class PostUseCaseTest {
         )
 
 
-        postUseCaseUnderTest.getCommentsByPostId(1, object : BaseUseCase.Callback<List<Comment>> {
+        postUseCaseUnderTest.getCommentsByPostId(1, object : UseCaseCallback<List<Comment>> {
             override fun onResult(result: List<Comment>) {
             }
 
@@ -97,7 +97,7 @@ class PostUseCaseTest {
             }
         })
 
-        postUseCaseUnderTest.getUserById(1, object : BaseUseCase.Callback<User> {
+        postUseCaseUnderTest.getUserById(1, object : UseCaseCallback<User> {
             override fun onResult(result: User) {
             }
 
@@ -106,7 +106,7 @@ class PostUseCaseTest {
             }
         })
 
-        postUseCaseUnderTest.getPostById(1, object : BaseUseCase.Callback<Post> {
+        postUseCaseUnderTest.getPostById(1, object : UseCaseCallback<Post> {
             override fun onResult(result: Post) {
             }
 

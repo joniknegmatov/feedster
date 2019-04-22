@@ -1,7 +1,8 @@
 package io.jonibek.feedster.viewmodel
 
 import io.jonibek.TestObjects
-import io.jonibek.feedster.data.pojo.Post
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.jonibek.feedster.domain.feeds.FeedsUseCase
 import io.jonibek.feedster.ui.feed.FeedsFragmentViewModel
 import org.junit.Assert.assertFalse
@@ -14,8 +15,8 @@ class FeedsViewModelTest : BaseViewModelTest(){
 
     @Test
     fun test_preload_view_state() {
-        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase() {
-            override fun getAllPosts(callback: Callback<List<Post>?>) {
+        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase {
+            override fun getAllPosts(callback: UseCaseCallback<List<Post>>) {
                 callback.onResult(TestObjects.getPostList())
             }
         })
@@ -25,8 +26,8 @@ class FeedsViewModelTest : BaseViewModelTest(){
 
     @Test
     fun test_data_loaded() {
-        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase() {
-            override fun getAllPosts(callback: Callback<List<Post>?>) {
+        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase {
+            override fun getAllPosts(callback: UseCaseCallback<List<Post>>) {
                 callback.onResult(TestObjects.getPostList())
             }
         })
@@ -39,8 +40,8 @@ class FeedsViewModelTest : BaseViewModelTest(){
 
     @Test
     fun test_data_load_error(){
-        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase() {
-            override fun getAllPosts(callback: Callback<List<Post>?>) {
+        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase {
+            override fun getAllPosts(callback: UseCaseCallback<List<Post>>) {
                 callback.onFailure(Throwable())
             }
         })
@@ -51,8 +52,9 @@ class FeedsViewModelTest : BaseViewModelTest(){
 
     @Test
     fun test_loading_state(){
-        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase() {
-            override fun getAllPosts(callback: Callback<List<Post>?>) {
+        viewModelUnderTest = FeedsFragmentViewModel(object : FeedsUseCase {
+            override fun getAllPosts(callback: UseCaseCallback<List<Post>>) {
+
             }
         })
         viewModelUnderTest.loadPosts()

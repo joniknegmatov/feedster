@@ -5,8 +5,8 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.databinding.Bindable
 import io.jonibek.feedster.BR
-import io.jonibek.feedster.data.pojo.Post
-import io.jonibek.feedster.domain.BaseUseCase
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.jonibek.feedster.domain.feeds.FeedsUseCase
 import io.jonibek.feedster.ui.ObservableViewModel
 import javax.inject.Inject
@@ -35,8 +35,8 @@ class FeedsFragmentViewModel @Inject constructor(private val feedsUseCase: Feeds
         feedsUseCase.getAllPosts(postsCallback)
     }
 
-    private val postsCallback = object : BaseUseCase.Callback<List<Post>?> {
-        override fun onResult(result: List<Post>?) {
+    private val postsCallback = object : UseCaseCallback<List<Post>> {
+        override fun onResult(result: List<Post>) {
             loadingInProgress = false
             postsLiveData.value = result
         }

@@ -1,4 +1,4 @@
-package io.jonibek.feedster.data.pojo
+package io.jonibek.feedster.data.entities
 
 import com.google.gson.annotations.SerializedName
 

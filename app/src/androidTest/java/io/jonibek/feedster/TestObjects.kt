@@ -2,9 +2,9 @@ package io.jonibek.feedster
 
 
 import com.google.gson.Gson
-import io.jonibek.feedster.data.pojo.Comment
-import io.jonibek.feedster.data.pojo.Post
-import io.jonibek.feedster.data.pojo.User
+import io.jonibek.feedster.data.entities.Comment
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.data.entities.User
 
 
 class TestObjects {

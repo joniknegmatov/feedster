@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import io.jonibek.feedster.R
-import io.jonibek.feedster.data.pojo.Post
+import io.jonibek.feedster.data.entities.Post
 
 
 class FeedsAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<FeedsAdapter.PostViewHolder>() {

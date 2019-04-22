@@ -1,7 +1,7 @@
 package io.jonibek.feedster.data.datasource.post
 
 import io.jonibek.feedster.data.datasource.post.remote.PostRemoteDataSource
-import io.jonibek.feedster.data.pojo.Post
+import io.jonibek.feedster.data.entities.Post
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -13,7 +13,7 @@ interface PostRepository {
 
     fun getPostById(postId : Int): Single<Post>
 
-    class PostRepositoryImpl @Inject constructor(val postRemoteDataSource: PostRemoteDataSource) : PostRepository {
+    class PostRepositoryImpl @Inject constructor(private val postRemoteDataSource: PostRemoteDataSource) : PostRepository {
 
         override fun getPostById(postId: Int) = postRemoteDataSource.getPostById(postId)
 

@@ -1,6 +1,6 @@
 package io.jonibek.feedster.data.datasource.user.remote
 
-import io.jonibek.feedster.data.pojo.User
+import io.jonibek.feedster.data.entities.User
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.http.GET

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import io.jonibek.feedster.R
-import io.jonibek.feedster.data.pojo.Comment
+import io.jonibek.feedster.data.entities.Comment
 
 
 class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {

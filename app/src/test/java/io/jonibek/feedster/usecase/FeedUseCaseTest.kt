@@ -2,8 +2,8 @@ package io.jonibek.feedster.usecase
 
 import io.jonibek.TestObjects
 import io.jonibek.feedster.data.datasource.post.PostRepository
-import io.jonibek.feedster.data.pojo.Post
-import io.jonibek.feedster.domain.BaseUseCase
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.jonibek.feedster.domain.feeds.FeedsUseCase
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -32,9 +32,9 @@ class FeedUseCaseTest {
             postRepository, Schedulers.trampoline(), Schedulers.trampoline()
         )
 
-        val callback = object : BaseUseCase.Callback<List<Post>?> {
-            override fun onResult(result: List<Post>?) {
-                assertTrue(result!!.size == posts.size)
+        val callback = object : UseCaseCallback<List<Post>> {
+            override fun onResult(result: List<Post>) {
+                assertTrue(result.size == posts.size)
             }
 
             override fun onFailure(e: Throwable) {
@@ -54,8 +54,8 @@ class FeedUseCaseTest {
             postRepository, Schedulers.trampoline(), Schedulers.trampoline()
         )
 
-        val callback = object : BaseUseCase.Callback<List<Post>?> {
-            override fun onResult(result: List<Post>?) {
+        val callback = object : UseCaseCallback<List<Post>> {
+            override fun onResult(result: List<Post>) {
 
             }
 

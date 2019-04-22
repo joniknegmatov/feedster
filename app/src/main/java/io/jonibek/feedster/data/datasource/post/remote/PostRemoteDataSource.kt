@@ -1,6 +1,6 @@
 package io.jonibek.feedster.data.datasource.post.remote
 
-import io.jonibek.feedster.data.pojo.Post
+import io.jonibek.feedster.data.entities.Post
 import io.reactivex.Single
 import javax.inject.Inject
 

@@ -5,33 +5,30 @@ import dagger.Provides
 import io.jonibek.feedster.data.datasource.comment.remote.CommentRemoteDataSource
 import io.jonibek.feedster.data.datasource.post.remote.PostRemoteDataSource
 import io.jonibek.feedster.data.datasource.user.remote.UserRemoteDataSource
-import org.mockito.Mockito
 import javax.inject.Singleton
 
 
 @Module
-class TestRemoteDataSourceModule {
+class TestRemoteDataSourceModule(
+    private val commentRemoteDataSource: CommentRemoteDataSource,
+    private val postRemoteDataSource: PostRemoteDataSource,
+    private val userRemoteDataSource: UserRemoteDataSource
+) {
 
-    companion object {
-        val commentRemoteDataSource: CommentRemoteDataSource = Mockito.mock(CommentRemoteDataSource::class.java)
-        val postRemoteDataSource: PostRemoteDataSource = Mockito.mock(PostRemoteDataSource::class.java)
-        val userRemoteDataSource: UserRemoteDataSource = Mockito.mock(UserRemoteDataSource::class.java)
-    }
-
-    @Singleton
     @Provides
+    @Singleton
     fun providesCommentRemoteDataSource(): CommentRemoteDataSource {
         return commentRemoteDataSource
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesPostRemoteDataSource(): PostRemoteDataSource {
         return postRemoteDataSource
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesUserRemoteDataSource(): UserRemoteDataSource {
         return userRemoteDataSource
     }

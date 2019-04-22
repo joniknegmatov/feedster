@@ -1,9 +1,10 @@
 package io.jonibek.feedster.viewmodel
 
 import io.jonibek.TestObjects
-import io.jonibek.feedster.data.pojo.Comment
-import io.jonibek.feedster.data.pojo.Post
-import io.jonibek.feedster.data.pojo.User
+import io.jonibek.feedster.data.entities.Comment
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.data.entities.User
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.jonibek.feedster.domain.post.PostUseCase
 import io.jonibek.feedster.ui.post.PostFragmentViewModel
 import org.junit.Assert.assertFalse
@@ -29,16 +30,16 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
     @Test
     fun test_post_fields(){
         val post = TestObjects.getPost()
-        viewModelUnderTest = PostFragmentViewModel(object : PostUseCase() {
-            override fun getPostById(postId: Int, callback: Callback<Post>) {
+        viewModelUnderTest = PostFragmentViewModel(object : PostUseCase {
+            override fun getPostById(postId: Int, callback: UseCaseCallback<Post>) {
                 callback.onResult(post)
             }
 
-            override fun getCommentsByPostId(postId: Int, callback: Callback<List<Comment>>) {
+            override fun getCommentsByPostId(postId: Int, callback: UseCaseCallback<List<Comment>>) {
                 callback.onFailure(Throwable())
             }
 
-            override fun getUserById(userId: Int, callback: Callback<User>) {
+            override fun getUserById(userId: Int, callback: UseCaseCallback<User>) {
                 callback.onFailure(Throwable())
             }
         })
@@ -54,15 +55,15 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
 
     @Test
     fun test_post_error(){
-        viewModelUnderTest = PostFragmentViewModel(object : PostUseCase() {
-            override fun getPostById(postId: Int, callback: Callback<Post>) {
+        viewModelUnderTest = PostFragmentViewModel(object : PostUseCase {
+            override fun getPostById(postId: Int, callback: UseCaseCallback<Post>) {
                 callback.onFailure(Throwable())
             }
 
-            override fun getCommentsByPostId(postId: Int, callback: Callback<List<Comment>>) {
+            override fun getCommentsByPostId(postId: Int, callback: UseCaseCallback<List<Comment>>) {
             }
 
-            override fun getUserById(userId: Int, callback: Callback<User>) {
+            override fun getUserById(userId: Int, callback: UseCaseCallback<User>) {
             }
         })
         test_pre_load_view_model_state()
@@ -75,15 +76,15 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
     fun test_user_fields(){
         val user = TestObjects.getUser()
         val post = TestObjects.getPost()
-        viewModelUnderTest = PostFragmentViewModel(object : PostUseCase() {
-            override fun getPostById(postId: Int, callback: Callback<Post>) {
+        viewModelUnderTest = PostFragmentViewModel(object : PostUseCase {
+            override fun getPostById(postId: Int, callback: UseCaseCallback<Post>) {
                 callback.onResult(post)
             }
 
-            override fun getCommentsByPostId(postId: Int, callback: Callback<List<Comment>>) {
+            override fun getCommentsByPostId(postId: Int, callback: UseCaseCallback<List<Comment>>) {
             }
 
-            override fun getUserById(userId: Int, callback: Callback<User>) {
+            override fun getUserById(userId: Int, callback: UseCaseCallback<User>) {
                 callback.onResult(user)
             }
         })
@@ -95,16 +96,16 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
     @Test
     fun test_comment_fields(){
         val comments = TestObjects.getComments()
-        viewModelUnderTest = PostFragmentViewModel(object  : PostUseCase() {
-            override fun getPostById(postId: Int, callback: Callback<Post>) {
+        viewModelUnderTest = PostFragmentViewModel(object  : PostUseCase {
+            override fun getPostById(postId: Int, callback: UseCaseCallback<Post>) {
 
             }
 
-            override fun getCommentsByPostId(postId: Int, callback: Callback<List<Comment>>) {
+            override fun getCommentsByPostId(postId: Int, callback: UseCaseCallback<List<Comment>>) {
                 callback.onResult(comments)
             }
 
-            override fun getUserById(userId: Int, callback: Callback<User>) {
+            override fun getUserById(userId: Int, callback: UseCaseCallback<User>) {
 
             }
         })
@@ -119,14 +120,14 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
 
     @Test
     fun test_loading_state(){
-        viewModelUnderTest = PostFragmentViewModel(object  : PostUseCase(){
-            override fun getPostById(postId: Int, callback: Callback<Post>) {
+        viewModelUnderTest = PostFragmentViewModel(object  : PostUseCase{
+            override fun getPostById(postId: Int, callback: UseCaseCallback<Post>) {
             }
 
-            override fun getCommentsByPostId(postId: Int, callback: Callback<List<Comment>>) {
+            override fun getCommentsByPostId(postId: Int, callback: UseCaseCallback<List<Comment>>) {
             }
 
-            override fun getUserById(userId: Int, callback: Callback<User>) {
+            override fun getUserById(userId: Int, callback: UseCaseCallback<User>) {
             }
         })
         test_pre_load_view_model_state()

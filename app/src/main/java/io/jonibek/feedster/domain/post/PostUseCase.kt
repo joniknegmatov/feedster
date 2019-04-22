@@ -3,60 +3,41 @@ package io.jonibek.feedster.domain.post
 import io.jonibek.feedster.data.datasource.comment.CommentRepository
 import io.jonibek.feedster.data.datasource.post.PostRepository
 import io.jonibek.feedster.data.datasource.user.UserRepository
-import io.jonibek.feedster.data.pojo.Comment
-import io.jonibek.feedster.data.pojo.Post
-import io.jonibek.feedster.data.pojo.User
+import io.jonibek.feedster.data.entities.Comment
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.data.entities.User
 import io.jonibek.feedster.domain.BaseUseCase
+import io.jonibek.feedster.domain.BaseUseCaseInterface
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-abstract class PostUseCase : BaseUseCase() {
+interface PostUseCase : BaseUseCaseInterface {
 
-    abstract fun getPostById(postId: Int, callback: Callback<Post>)
+    fun getPostById(postId: Int, callback: UseCaseCallback<Post>)
 
-    abstract fun getCommentsByPostId(postId: Int, callback: Callback<List<Comment>>)
+    fun getCommentsByPostId(postId: Int, callback: UseCaseCallback<List<Comment>>)
 
-    abstract fun getUserById(userId: Int, callback: Callback<User>)
+    fun getUserById(userId: Int, callback: UseCaseCallback<User>)
 
     class PostUseCaseImpl @Inject constructor(
         private val postRepository: PostRepository,
         private val commentRepository: CommentRepository,
         private val userRepository: UserRepository,
-        private val subscribeScheduler: Scheduler,
-        private val observeScheduler: Scheduler
-    ) : PostUseCase() {
+        subscribeScheduler: Scheduler,
+        observeScheduler: Scheduler
+    ) : PostUseCase, BaseUseCase(subscribeScheduler, observeScheduler) {
 
-
-        override fun getUserById(userId: Int, callback: Callback<User>) {
-            compositeDisposable.addAll(
-                userRepository.getUserById(userId)
-                    .subscribeOn(subscribeScheduler)
-                    .observeOn(observeScheduler)
-                    .subscribe({ callback.onResult(it) }, { callback.onFailure(it) })
-
-            )
+        override fun getUserById(userId: Int, callback: UseCaseCallback<User>) {
+            addDisposable(userRepository.getUserById(userId), callback)
         }
 
-        override fun getPostById(postId: Int, callback: Callback<Post>) {
-            compositeDisposable.addAll(
-                postRepository.getPostById(postId)
-                    .subscribeOn(subscribeScheduler)
-                    .observeOn(observeScheduler)
-                    .subscribe({ callback.onResult(it) }, { callback.onFailure(it) })
-
-            )
+        override fun getPostById(postId: Int, callback: UseCaseCallback<Post>) {
+            addDisposable(postRepository.getPostById(postId), callback)
         }
 
-        override fun getCommentsByPostId(postId: Int, callback: Callback<List<Comment>>) {
-            compositeDisposable.addAll(
-                commentRepository.getCommentsByPostId(postId)
-                    .subscribeOn(subscribeScheduler)
-                    .observeOn(observeScheduler)
-                    .subscribe({ callback.onResult(it) }, { callback.onFailure(it) })
-
-            )
+        override fun getCommentsByPostId(postId: Int, callback: UseCaseCallback<List<Comment>>) {
+            addDisposable(commentRepository.getCommentsByPostId(postId), callback)
         }
 
 

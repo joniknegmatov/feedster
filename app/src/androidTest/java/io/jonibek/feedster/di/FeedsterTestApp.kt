@@ -1,19 +1,24 @@
 package io.jonibek.feedster.di
 
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import io.jonibek.feedster.FeedsterApp
+import android.app.Activity
+import android.app.Application
+import android.support.v4.app.Fragment
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
-class FeedsterTestApp : FeedsterApp() {
+class FeedsterTestApp : Application(), HasSupportFragmentInjector,HasActivityInjector {
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        val appComponent = DaggerTestAppComponent
-            .builder()
-            .application(this)
-            .setAppModule(AppModule(this))
-            .build()
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
-        appComponent.inject(this)
-        return appComponent
-    }
+    @Inject
+    lateinit var activityInjector : DispatchingAndroidInjector<Activity>
+
+    override fun supportFragmentInjector() = fragmentInjector
+
+    override fun activityInjector() = activityInjector
+
+
 }

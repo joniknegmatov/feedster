@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import dagger.android.support.DaggerFragment
 import io.jonibek.feedster.R
-import io.jonibek.feedster.data.pojo.Post
+import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.databinding.FragmentFeedBinding
 import io.jonibek.feedster.ui.post.PostFragment.Companion.POST_ID
 import javax.inject.Inject

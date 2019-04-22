@@ -5,10 +5,10 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.databinding.Bindable
 import io.jonibek.feedster.BR
-import io.jonibek.feedster.data.pojo.Comment
-import io.jonibek.feedster.data.pojo.Post
-import io.jonibek.feedster.data.pojo.User
-import io.jonibek.feedster.domain.BaseUseCase
+import io.jonibek.feedster.data.entities.Comment
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.data.entities.User
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.jonibek.feedster.domain.post.PostUseCase
 import io.jonibek.feedster.ui.ObservableViewModel
 import javax.inject.Inject
@@ -90,7 +90,7 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
 
     }
 
-    private val singlePostCallback = object : BaseUseCase.Callback<Post> {
+    private val singlePostCallback = object : UseCaseCallback<Post> {
         override fun onResult(result: Post) {
             loadingInProgress = false
             result.userId?.let {
@@ -106,7 +106,7 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
         }
     }
 
-    private val commentsCallback = object : BaseUseCase.Callback<List<Comment>> {
+    private val commentsCallback = object : UseCaseCallback<List<Comment>> {
         override fun onResult(result: List<Comment>) {
             setComments(result)
         }
@@ -117,7 +117,7 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
 
     }
 
-    private val userCallback = object : BaseUseCase.Callback<User> {
+    private val userCallback = object : UseCaseCallback<User> {
 
         override fun onResult(result: User) {
             postAuthor = result.username!!
@@ -138,6 +138,11 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
     private fun setPostData(post: Post) {
         postTitle = post.title
         postBody = post.body
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        postUseCase.clear()
     }
 
     class Factory @Inject constructor(private val postUseCase: PostUseCase) : ViewModelProvider.Factory {

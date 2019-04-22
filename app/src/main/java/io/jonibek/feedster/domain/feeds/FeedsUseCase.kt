@@ -1,28 +1,25 @@
 package io.jonibek.feedster.domain.feeds
 
 import io.jonibek.feedster.data.datasource.post.PostRepository
-import io.jonibek.feedster.data.pojo.Post
+import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.domain.BaseUseCase
+import io.jonibek.feedster.domain.BaseUseCaseInterface
+import io.jonibek.feedster.domain.UseCaseCallback
 import io.reactivex.Scheduler
 import javax.inject.Inject
 
-abstract class FeedsUseCase : BaseUseCase() {
+interface FeedsUseCase : BaseUseCaseInterface {
 
-    abstract fun getAllPosts(callback: Callback<List<Post>?>)
+    fun getAllPosts(callback: UseCaseCallback<List<Post>>)
 
     class FeedsUseCaseImpl @Inject constructor(
         private val postRepository: PostRepository,
-        private val subscribeScheduler: Scheduler,
-        private val observeScheduler: Scheduler
-    ) : FeedsUseCase() {
+        subscribeScheduler: Scheduler,
+        observeScheduler: Scheduler
+    ) : FeedsUseCase, BaseUseCase(subscribeScheduler, observeScheduler) {
 
-        override fun getAllPosts(callback: Callback<List<Post>?>) {
-            compositeDisposable.addAll(
-                postRepository.getAllPosts()
-                    .subscribeOn(subscribeScheduler)
-                    .observeOn(observeScheduler)
-                    .subscribe({ callback.onResult(it) }, { callback.onFailure(it) })
-            )
+        override fun getAllPosts(callback: UseCaseCallback<List<Post>>) {
+            addDisposable(postRepository.getAllPosts(), callback)
         }
 
     }

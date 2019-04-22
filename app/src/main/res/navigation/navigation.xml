@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@+id/feeds_screen">
+
+    <fragment
+            android:id="@+id/feeds_screen"
+            android:name="io.jonibek.feedster.ui.feed.FeedsFragment"
+            android:label="fragment_feeds_screen"
+            tools:layout="@layout/fragment_feed">
+        <action
+                android:id="@+id/action_feeds_screen_to_full_post"
+                app:destination="@id/post_screen"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/post_screen"
+            android:name="io.jonibek.feedster.ui.post.PostFragment"
+            android:label="fragment_post_screen"
+            tools:layout="@layout/fragment_post">
+        <argument android:name="POST_ID" android:defaultValue="0"/>
+    </fragment>
+</navigation>

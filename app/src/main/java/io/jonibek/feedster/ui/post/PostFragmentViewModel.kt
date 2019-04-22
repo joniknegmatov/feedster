@@ -55,27 +55,27 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
         }
 
     @get:Bindable
-    var commentsCount : String = ""
-    set(value) {
-        field = "($value)"
-        notifyPropertyChanged(BR.commentsCount)
-    }
+    var commentsCount: String = ""
+        set(value) {
+            field = "($value)"
+            notifyPropertyChanged(BR.commentsCount)
+        }
 
     @get:Bindable
-    var commentSectionVisiblity : Boolean = false
-    set(value) {
-        field = value
-        notifyPropertyChanged(BR.commentSectionVisiblity)
-    }
+    var commentSectionVisiblity: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.commentSectionVisiblity)
+        }
 
     @get:Bindable
-    var commentsSectionExpended : Boolean = false
-    set(value) {
-        field = value
-        notifyPropertyChanged(BR.commentsSectionExpended)
-    }
+    var commentsSectionExpended: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.commentsSectionExpended)
+        }
 
-    fun expendComments(){
+    fun expendComments() {
         commentsSectionExpended = !commentsSectionExpended
     }
 
@@ -84,38 +84,52 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
         loadingInProgress = true
 
         postId?.let { id ->
-            postUseCase.getPostById(id, object : BaseUseCase.Callback<Post> {
-
-                override fun onResult(result: Post) {
-                    loadingInProgress = false
-                    result.userId?.let {
-                        loadUserData(it)
-                    }
-
-                    setPostData(result)
-                }
-
-                override fun onFailure(e: Throwable) {
-                    loadingInProgress = false
-                    showReloadButton = true
-                }
-            })
-
-            postUseCase.getCommentsByPostId(id, object : BaseUseCase.Callback<List<Comment>> {
-                override fun onResult(result: List<Comment>) {
-                    setComments(result)
-                }
-
-                override fun onFailure(e: Throwable) {
-                    //TODO IMPLEMENT ON ERROR CASE
-                }
-
-            })
+            postUseCase.getPostById(id, singlePostCallback)
+            postUseCase.getCommentsByPostId(id, commentsCallback)
         }
 
     }
 
-    private fun setComments(comments : List<Comment>){
+    private val singlePostCallback = object : BaseUseCase.Callback<Post> {
+        override fun onResult(result: Post) {
+            loadingInProgress = false
+            result.userId?.let {
+                postUseCase.getUserById(it, userCallback)
+            }
+
+            setPostData(result)
+        }
+
+        override fun onFailure(e: Throwable) {
+            loadingInProgress = false
+            showReloadButton = true
+        }
+    }
+
+    private val commentsCallback = object : BaseUseCase.Callback<List<Comment>> {
+        override fun onResult(result: List<Comment>) {
+            setComments(result)
+        }
+
+        override fun onFailure(e: Throwable) {
+            //TODO IMPLEMENT ON ERROR CASE
+        }
+
+    }
+
+    private val userCallback = object : BaseUseCase.Callback<User> {
+
+        override fun onResult(result: User) {
+            postAuthor = result.username!!
+        }
+
+        override fun onFailure(e: Throwable) {
+            //TODO IMPLEMENT ON ERROR CASE
+        }
+
+    }
+
+    private fun setComments(comments: List<Comment>) {
         commentListLiveData.value = comments
         commentSectionVisiblity = comments.isNotEmpty()
         commentsCount = comments.size.toString()
@@ -124,20 +138,6 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
     private fun setPostData(post: Post) {
         postTitle = post.title
         postBody = post.body
-    }
-
-    fun loadUserData(userId: Int) {
-        postUseCase.getUserById(userId, object : BaseUseCase.Callback<User> {
-
-            override fun onResult(result: User) {
-                postAuthor = result.username!!
-            }
-
-            override fun onFailure(e: Throwable) {
-                //TODO IMPLEMENT ON ERROR CASE
-            }
-
-        })
     }
 
     class Factory @Inject constructor(private val postUseCase: PostUseCase) : ViewModelProvider.Factory {

@@ -32,19 +32,20 @@ class FeedsFragmentViewModel @Inject constructor(private val feedsUseCase: Feeds
     fun loadPosts() {
         showReloadButton = false
         loadingInProgress = true
+        feedsUseCase.getAllPosts(postsCallback)
+    }
 
-        feedsUseCase.getAllPosts(object : BaseUseCase.Callback<List<Post>?> {
-            override fun onResult(result: List<Post>?) {
-                loadingInProgress = false
-                postsLiveData.value = result
-            }
+    private val postsCallback = object : BaseUseCase.Callback<List<Post>?> {
+        override fun onResult(result: List<Post>?) {
+            loadingInProgress = false
+            postsLiveData.value = result
+        }
 
-            override fun onFailure(e: Throwable) {
-                loadingInProgress = false
-                showReloadButton = postsLiveData.value == null
-            }
+        override fun onFailure(e: Throwable) {
+            loadingInProgress = false
+            showReloadButton = postsLiveData.value == null
+        }
 
-        })
     }
 
     override fun onCleared() {

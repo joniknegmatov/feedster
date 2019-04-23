@@ -27,13 +27,12 @@ interface UseCaseCallback<T> {
 
     fun onResult(result: T)
 
-    fun onFailure(e: Throwable)
+    fun onFailure(e: Throwable){}
 
 }
 
 interface BaseUseCaseInterface{
 
-    fun clear(){
+    fun clear(){}
 
-    }
 }

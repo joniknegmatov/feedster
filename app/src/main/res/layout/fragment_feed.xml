@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"/>
 
         <ProgressBar
-                android:visibility="@{vm.loadingInProgress}"
+                app:visibility="@{vm.loadingInProgress}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
 
         <ImageView
                 tools:ignore="ContentDescription"
-                android:visibility="@{vm.showReloadButton}"
+                app:visibility="@{vm.showReloadButton}"
                 android:onClick="@{() -> vm.loadPosts()}"
                 android:src="@drawable/ic_replay"
                 app:layout_constraintStart_toStartOf="parent"

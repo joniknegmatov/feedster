@@ -1,0 +1,39 @@
+package io.jonibek.feedster.viewmodel
+
+import io.jonibek.TestObjects
+import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.domain.UseCaseCallback
+import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
+import io.jonibek.feedster.ui.feed.FeedItemViewModel
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
+import org.junit.Test
+
+class FeedItemViewModelTest : BaseViewModelTest() {
+
+    private lateinit var viewModelUnderTest: FeedItemViewModel
+    private var post: Post = TestObjects.getPost()
+
+    @Test
+    fun test_state() {
+        viewModelUnderTest = FeedItemViewModel(post,object : FeedItemUseCase {
+
+            override fun changeFavorite(postId: Int, callback: UseCaseCallback<Boolean>) {
+                callback.onResult(true)
+            }
+
+            override fun isPostFavorite(postId: Int, callback: UseCaseCallback<Boolean>) {
+                callback.onResult(false)
+            }
+
+        })
+
+        assertTrue(viewModelUnderTest.postTitle == post.title)
+        assertTrue(viewModelUnderTest.postBody == post.body)
+        assertFalse(viewModelUnderTest.isPostFavorite)
+        viewModelUnderTest.changeFavorite()
+        assertTrue(viewModelUnderTest.isPostFavorite)
+    }
+
+
+}

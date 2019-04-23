@@ -17,7 +17,6 @@ class FeedUseCaseTest {
 
     private lateinit var feedUseCaseUnderTest: FeedsUseCase
     private val posts = TestObjects.getPostList()
-    private val post = TestObjects.getPost()
     private var postRepository: PostRepository = Mockito.mock(PostRepository::class.java)
 
     @Before

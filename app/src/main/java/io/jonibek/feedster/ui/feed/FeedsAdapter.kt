@@ -1,15 +1,12 @@
 package io.jonibek.feedster.ui.feed
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import io.jonibek.feedster.R
 import io.jonibek.feedster.data.entities.Post
+import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
 
 
-class FeedsAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<FeedsAdapter.PostViewHolder>() {
+class FeedsAdapter(private val onItemClickListener: OnItemClickListener,private val feedItemUseCase: FeedItemUseCase) : RecyclerView.Adapter<FeedItemViewHolder>() {
 
     private val postList: MutableList<Post> = mutableListOf()
 
@@ -18,31 +15,18 @@ class FeedsAdapter(private val onItemClickListener: OnItemClickListener) : Recyc
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.list_item_feed, parent, false)
-        return PostViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedItemViewHolder {
+        return FeedItemViewHolder.newInstance(parent,feedItemUseCase)
     }
 
     override fun getItemCount(): Int = postList.size
 
-    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.apply {
-            val post = postList[position]
-            tvPostTitle.text = post.title
-            tvPostBody.text = post.body
-            itemView.setOnClickListener {
-                onItemClickListener.onItemClick(post)
-            }
-        }
-    }
-
-    class PostViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvPostTitle: TextView = view.findViewById(R.id.post_title_text)
-        val tvPostBody: TextView = view.findViewById(R.id.post_body_text)
+    override fun onBindViewHolder(holder: FeedItemViewHolder, position: Int) {
+        holder.bind(postList[position], onItemClickListener)
     }
 
     interface OnItemClickListener {
         fun onItemClick(post: Post)
     }
+
 }

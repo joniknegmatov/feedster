@@ -105,7 +105,7 @@
 
                     <android.support.constraint.ConstraintLayout
                             android:layout_width="0dp"
-                            android:visibility="@{vm.commentSectionVisiblity}"
+                            app:visibility="@{vm.commentSectionVisiblity}"
                             android:id="@+id/comment_section"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -138,7 +138,7 @@
                                 android:layout_marginBottom="8dp"
                                 app:layout_constraintBottom_toBottomOf="parent"/>
                         <ImageButton
-                                android:isExpanded="@{vm.commentsSectionExpended}"
+                                app:isExpanded="@{vm.commentsSectionExpended}"
                                 android:onClick="@{() -> vm.expendComments()}"
                                 android:id="@+id/expand_button"
                                 android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
                     </android.support.constraint.ConstraintLayout>
 
                     <android.support.v7.widget.RecyclerView
-                            android:visibility="@{vm.commentsSectionExpended}"
+                            app:visibility="@{vm.commentsSectionExpended}"
                             android:id="@+id/rvComments"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +165,7 @@
             </android.support.v7.widget.CardView>
 
             <ProgressBar
-                    android:visibility="@{vm.loadingInProgress}"
+                    app:visibility="@{vm.loadingInProgress}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +174,8 @@
 
             <ImageView
                     tools:ignore="ContentDescription"
-                    android:visibility="@{vm.showReloadButton}"
+                    android:visibility="gone"
+                    app:visibility="@{vm.showReloadButton}"
                     android:onClick="@{() -> vm.loadData()}"
                     android:src="@drawable/ic_replay"
                     app:layout_constraintStart_toStartOf="parent"

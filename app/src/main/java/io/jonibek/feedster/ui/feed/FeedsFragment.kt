@@ -13,6 +13,7 @@ import dagger.android.support.DaggerFragment
 import io.jonibek.feedster.R
 import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.databinding.FragmentFeedBinding
+import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
 import io.jonibek.feedster.ui.post.PostFragment.Companion.POST_ID
 import javax.inject.Inject
 
@@ -21,6 +22,9 @@ class FeedsFragment : DaggerFragment(), FeedsAdapter.OnItemClickListener {
 
     @Inject
     lateinit var fragmentViewModelFactory: FeedsFragmentViewModel.Factory
+
+    @Inject
+    lateinit var feedItemUseCase: FeedItemUseCase
 
     private lateinit var binding: FragmentFeedBinding
     private lateinit var fragmentViewModel: FeedsFragmentViewModel
@@ -40,7 +44,7 @@ class FeedsFragment : DaggerFragment(), FeedsAdapter.OnItemClickListener {
     }
 
     private fun setupRecyclerView() {
-        feedsAdapter = FeedsAdapter(this)
+        feedsAdapter = FeedsAdapter(this, feedItemUseCase)
         binding.rvPosts.layoutManager = LinearLayoutManager(context)
         binding.rvPosts.adapter = feedsAdapter
     }

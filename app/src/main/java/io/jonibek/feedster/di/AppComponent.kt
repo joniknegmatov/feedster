@@ -7,6 +7,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import dagger.android.support.AndroidSupportInjectionModule
 import io.jonibek.feedster.FeedsterApp
+import io.jonibek.feedster.di.data.LocalDataSourceModule
 import io.jonibek.feedster.di.data.RemoteDataSourceModule
 import io.jonibek.feedster.di.data.RepositoryModule
 import io.jonibek.feedster.di.features.FeedsFragmentModule
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     modules = [AndroidSupportInjectionModule::class,
         AppModule::class,
         RemoteDataSourceModule::class,
+        LocalDataSourceModule::class,
         RepositoryModule::class,
         FragmentBuildersModule::class,
         FeedsFragmentModule::class,

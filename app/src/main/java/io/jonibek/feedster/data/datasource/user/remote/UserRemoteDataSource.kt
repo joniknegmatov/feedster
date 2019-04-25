@@ -8,7 +8,7 @@ interface UserRemoteDataSource {
 
     fun getUserById(userId: Int): Single<User>
 
-    class UserRemoteDataSourceImpl @Inject constructor(val userApi: UserApi) : UserRemoteDataSource {
+    class UserRemoteDataSourceImpl @Inject constructor(private val userApi: UserApi) : UserRemoteDataSource {
 
        override  fun getUserById(userId: Int) = userApi.getUserById(userId)
 

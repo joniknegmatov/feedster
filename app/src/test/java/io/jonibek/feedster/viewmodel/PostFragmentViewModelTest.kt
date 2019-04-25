@@ -13,12 +13,12 @@ import org.junit.Test
 
 class PostFragmentViewModelTest : BaseViewModelTest() {
 
-    lateinit var viewModelUnderTest: PostFragmentViewModel
+    private lateinit var viewModelUnderTest: PostFragmentViewModel
 
     private fun test_pre_load_view_model_state() {
         viewModelUnderTest.postId = 1
         assertTrue(viewModelUnderTest.commentsCount == "")
-        assertFalse(viewModelUnderTest.commentSectionVisiblity)
+        assertFalse(viewModelUnderTest.commentSectionVisibility)
         assertTrue(viewModelUnderTest.postBody == "")
         assertTrue(viewModelUnderTest.postTitle == "")
         assertTrue(viewModelUnderTest.postAuthor == "")
@@ -49,7 +49,7 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
         assertTrue(viewModelUnderTest.postBody == post.body)
         assertFalse(viewModelUnderTest.loadingInProgress)
         assertFalse(viewModelUnderTest.showReloadButton)
-        assertFalse(viewModelUnderTest.commentSectionVisiblity)
+        assertFalse(viewModelUnderTest.commentSectionVisibility)
         assertTrue(viewModelUnderTest.commentsCount == "")
     }
 
@@ -112,7 +112,7 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
         test_pre_load_view_model_state()
         viewModelUnderTest.loadData()
         assertTrue(viewModelUnderTest.commentsCount == "(${comments.size})")
-        assertTrue(viewModelUnderTest.commentSectionVisiblity)
+        assertTrue(viewModelUnderTest.commentSectionVisibility)
         assertFalse(viewModelUnderTest.commentsSectionExpended)
         viewModelUnderTest.expendComments()
         assertTrue(viewModelUnderTest.commentsSectionExpended)
@@ -133,7 +133,7 @@ class PostFragmentViewModelTest : BaseViewModelTest() {
         test_pre_load_view_model_state()
         viewModelUnderTest.loadData()
         assertTrue(viewModelUnderTest.commentsCount == "")
-        assertFalse(viewModelUnderTest.commentSectionVisiblity)
+        assertFalse(viewModelUnderTest.commentSectionVisibility)
         assertTrue(viewModelUnderTest.postBody == "")
         assertTrue(viewModelUnderTest.postTitle == "")
         assertTrue(viewModelUnderTest.postAuthor == "")

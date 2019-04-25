@@ -9,7 +9,7 @@ interface UserRepository {
 
     fun getUserById(userId: Int): Single<User>
 
-    class UserRepositoryImpl @Inject constructor(val userRemoteDataSource: UserRemoteDataSource) : UserRepository {
+    class UserRepositoryImpl @Inject constructor(private val userRemoteDataSource: UserRemoteDataSource) : UserRepository {
 
         override fun getUserById(userId: Int) = userRemoteDataSource.getUserById(userId)
     }

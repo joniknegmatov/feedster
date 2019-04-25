@@ -9,7 +9,7 @@ import org.junit.Test
 
 class PostLocalDataSourceTest {
 
-    lateinit var postLocalDataSourceUnderTest: PostLocalDataSource
+    private lateinit var postLocalDataSourceUnderTest: PostLocalDataSource
 
     private val favoritePostManager = object : FavoritePostManager {
 

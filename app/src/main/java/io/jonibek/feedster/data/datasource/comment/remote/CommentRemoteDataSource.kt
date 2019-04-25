@@ -8,7 +8,7 @@ interface CommentRemoteDataSource {
 
     fun getCommentsByPostId(postId: Int): Single<List<Comment>>
 
-    class CommentRemoteDataSourceImpl @Inject constructor(val commentApiImpl: CommentApi.CommentApiImpl) : CommentRemoteDataSource {
+    class CommentRemoteDataSourceImpl @Inject constructor(private val commentApiImpl: CommentApi.CommentApiImpl) : CommentRemoteDataSource {
 
         override fun getCommentsByPostId(postId: Int) = commentApiImpl.getCommentsByPostId(postId)
 

@@ -28,7 +28,7 @@ import org.mockito.MockitoAnnotations
 class UiTest {
 
     @get:Rule
-    var activityRule = ActivityTestRule(MainActivity::class.java, true, false)
+    var activityRule = ActivityTestRule(MainActivity::class.java, true,  false)
 
     private val comments = TestObjects.getComments()
     private val posts = TestObjects.getPostList()

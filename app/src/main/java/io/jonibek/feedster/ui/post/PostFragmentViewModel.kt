@@ -62,10 +62,10 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
         }
 
     @get:Bindable
-    var commentSectionVisiblity: Boolean = false
+    var commentSectionVisibility: Boolean = false
         set(value) {
             field = value
-            notifyPropertyChanged(BR.commentSectionVisiblity)
+            notifyPropertyChanged(BR.commentSectionVisibility)
         }
 
     @get:Bindable
@@ -131,7 +131,7 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
 
     private fun setComments(comments: List<Comment>) {
         commentListLiveData.value = comments
-        commentSectionVisiblity = comments.isNotEmpty()
+        commentSectionVisibility = comments.isNotEmpty()
         commentsCount = comments.size.toString()
     }
 

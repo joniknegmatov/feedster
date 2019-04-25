@@ -12,7 +12,7 @@ interface PostRemoteDataSource {
 
     fun getPostById(postId: Int): Single<Post>
 
-    class PostRemoteDataSourceImpl @Inject constructor(val postsApi: PostApi) : PostRemoteDataSource {
+    class PostRemoteDataSourceImpl @Inject constructor(private val postsApi: PostApi) : PostRemoteDataSource {
 
         override fun getPostById(postId: Int): Single<Post> = postsApi.getPostById(postId)
 

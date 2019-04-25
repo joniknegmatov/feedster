@@ -1,6 +1,6 @@
 package io.jonibek.feedster.viewmodel
 
-import io.jonibek.TestObjects
+import io.jonibek.feedster.TestObjects
 import io.jonibek.feedster.data.entities.Comment
 import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.data.entities.User

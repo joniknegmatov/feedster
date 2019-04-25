@@ -1,6 +1,6 @@
 package io.jonibek.feedster.usecase
 
-import io.jonibek.TestObjects
+import io.jonibek.feedster.TestObjects
 import io.jonibek.feedster.data.datasource.post.PostRepository
 import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.domain.internal.UseCaseCallback

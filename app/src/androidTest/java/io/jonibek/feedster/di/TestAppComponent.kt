@@ -12,6 +12,7 @@ import javax.inject.Singleton
 @Component(
     modules = [AndroidSupportInjectionModule::class,
         TestRemoteDataSourceModule::class,
+        TestLocalDataSourceModule::class,
         RepositoryModule::class,
         FragmentBuildersModule::class,
         FeedsFragmentModule::class,

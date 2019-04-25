@@ -23,8 +23,7 @@ import javax.inject.Singleton
         RepositoryModule::class,
         FragmentBuildersModule::class,
         FeedsFragmentModule::class,
-        PostFragmentModule::class,
-        NavigationModule::class]
+        PostFragmentModule::class]
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {
 

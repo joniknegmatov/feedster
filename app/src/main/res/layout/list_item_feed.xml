@@ -2,7 +2,7 @@
 <layout>
 
     <data>
-        <variable type="io.jonibek.feedster.ui.feed.FeedItemViewModel"
+        <variable type="io.jonibek.feedster.ui.feed.feeditem.FeedItemViewModel"
                   name="vm"/>
     </data>
 

@@ -2,7 +2,7 @@ package io.jonibek.feedster.usecase
 
 import io.jonibek.feedster.data.datasource.post.PostRepository
 import io.jonibek.feedster.data.entities.Post
-import io.jonibek.feedster.domain.UseCaseCallback
+import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -47,8 +47,6 @@ class FeedsItemUseCaseTest {
             }
 
         })
-
-
     }
 
     @Test

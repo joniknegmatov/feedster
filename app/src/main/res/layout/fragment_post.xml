@@ -174,7 +174,6 @@
 
             <ImageView
                     tools:ignore="ContentDescription"
-                    android:visibility="gone"
                     app:visibility="@{vm.showReloadButton}"
                     android:onClick="@{() -> vm.loadData()}"
                     android:src="@drawable/ic_replay"

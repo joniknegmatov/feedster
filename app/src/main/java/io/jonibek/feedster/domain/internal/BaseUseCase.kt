@@ -1,10 +1,11 @@
-package io.jonibek.feedster.domain
+package io.jonibek.feedster.domain.internal
 
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseUseCase(private val subscribeScheduler: Scheduler, private val observeScheduler: Scheduler) : BaseUseCaseInterface {
+abstract class BaseUseCase(private val subscribeScheduler: Scheduler, private val observeScheduler: Scheduler) :
+    BaseUseCaseInterface {
 
     private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
 

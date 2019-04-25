@@ -7,7 +7,7 @@ import io.jonibek.feedster.data.datasource.user.UserRepository
 import io.jonibek.feedster.data.entities.Comment
 import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.data.entities.User
-import io.jonibek.feedster.domain.UseCaseCallback
+import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.post.PostUseCase
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -42,7 +42,8 @@ class PostUseCaseTest {
         )
 
 
-        postUseCaseUnderTest.getCommentsByPostId(1, object : UseCaseCallback<List<Comment>> {
+        postUseCaseUnderTest.getCommentsByPostId(1, object :
+            UseCaseCallback<List<Comment>> {
             override fun onResult(result: List<Comment>) {
                 assertTrue(comments.size == result.size)
             }
@@ -88,7 +89,8 @@ class PostUseCaseTest {
         )
 
 
-        postUseCaseUnderTest.getCommentsByPostId(1, object : UseCaseCallback<List<Comment>> {
+        postUseCaseUnderTest.getCommentsByPostId(1, object :
+            UseCaseCallback<List<Comment>> {
             override fun onResult(result: List<Comment>) {
             }
 

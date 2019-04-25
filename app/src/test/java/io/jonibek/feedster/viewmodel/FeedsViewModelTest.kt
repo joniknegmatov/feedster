@@ -2,7 +2,7 @@ package io.jonibek.feedster.viewmodel
 
 import io.jonibek.TestObjects
 import io.jonibek.feedster.data.entities.Post
-import io.jonibek.feedster.domain.UseCaseCallback
+import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.feeds.FeedsUseCase
 import io.jonibek.feedster.ui.feed.FeedsFragmentViewModel
 import org.junit.Assert.assertFalse

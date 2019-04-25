@@ -2,9 +2,9 @@ package io.jonibek.feedster.viewmodel
 
 import io.jonibek.TestObjects
 import io.jonibek.feedster.data.entities.Post
-import io.jonibek.feedster.domain.UseCaseCallback
+import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
-import io.jonibek.feedster.ui.feed.FeedItemViewModel
+import io.jonibek.feedster.ui.feed.feeditem.FeedItemViewModel
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
 import org.junit.Test
@@ -16,7 +16,7 @@ class FeedItemViewModelTest : BaseViewModelTest() {
 
     @Test
     fun test_state() {
-        viewModelUnderTest = FeedItemViewModel(post,object : FeedItemUseCase {
+        viewModelUnderTest = FeedItemViewModel(post, object : FeedItemUseCase {
 
             override fun changeFavorite(postId: Int, callback: UseCaseCallback<Boolean>) {
                 callback.onResult(true)

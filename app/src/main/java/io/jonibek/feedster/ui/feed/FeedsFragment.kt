@@ -14,6 +14,7 @@ import io.jonibek.feedster.R
 import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.databinding.FragmentFeedBinding
 import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
+import io.jonibek.feedster.ui.feed.feeditem.FeedsAdapter
 import io.jonibek.feedster.ui.post.PostFragment.Companion.POST_ID
 import javax.inject.Inject
 

@@ -1,9 +1,9 @@
-package io.jonibek.feedster.ui.feed
+package io.jonibek.feedster.ui.feed.feeditem
 
 import android.databinding.Bindable
 import io.jonibek.feedster.BR
 import io.jonibek.feedster.data.entities.Post
-import io.jonibek.feedster.domain.UseCaseCallback
+import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
 import io.jonibek.feedster.ui.ObservableViewModel
 

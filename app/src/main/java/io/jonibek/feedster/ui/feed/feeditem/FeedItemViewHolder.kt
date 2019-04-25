@@ -1,4 +1,4 @@
-package io.jonibek.feedster.ui.feed
+package io.jonibek.feedster.ui.feed.feeditem
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
@@ -24,7 +24,7 @@ class FeedItemViewHolder(private val binding: ListItemFeedBinding, private val f
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding: ListItemFeedBinding =
                 DataBindingUtil.inflate(layoutInflater, R.layout.list_item_feed, parent, false)
-            return FeedItemViewHolder(binding,feedItemUseCase)
+            return FeedItemViewHolder(binding, feedItemUseCase)
         }
     }
 

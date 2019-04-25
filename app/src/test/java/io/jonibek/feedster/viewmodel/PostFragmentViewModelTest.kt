@@ -4,7 +4,7 @@ import io.jonibek.TestObjects
 import io.jonibek.feedster.data.entities.Comment
 import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.data.entities.User
-import io.jonibek.feedster.domain.UseCaseCallback
+import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.post.PostUseCase
 import io.jonibek.feedster.ui.post.PostFragmentViewModel
 import org.junit.Assert.assertFalse

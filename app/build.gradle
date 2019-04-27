@@ -26,6 +26,14 @@ android {
 
     testOptions {
         animationsDisabled = true
+
+
+        unitTests {
+            all {
+                //Handling out of memory errors
+                maxHeapSize = "1024m"
+            }
+        }
     }
 
     sourceSets {

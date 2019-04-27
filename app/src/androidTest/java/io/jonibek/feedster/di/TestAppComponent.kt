@@ -2,6 +2,7 @@ package io.jonibek.feedster.di
 
 import dagger.Component
 import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 import dagger.android.support.AndroidSupportInjectionModule
 import io.jonibek.feedster.di.data.RepositoryModule
 import io.jonibek.feedster.di.features.FeedsFragmentModule
@@ -18,12 +19,18 @@ import javax.inject.Singleton
         FeedsFragmentModule::class,
         PostFragmentModule::class]
 )
-interface TestAppComponent : AndroidInjector<FeedsterTestApp> {
+interface TestAppComponent : AndroidInjector<DaggerApplication> {
+
+
+    fun inject(app: FeedsterTestApp)
+
+    override fun inject(app: DaggerApplication)
 
     @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<FeedsterTestApp>() {
+    interface Builder {
 
-        abstract fun setTestRemoteDataSourceModule(module: TestRemoteDataSourceModule): Builder
+        fun setTestRemoteDataSourceModule(module: TestRemoteDataSourceModule): Builder
 
+        fun build() : TestAppComponent
     }
 }

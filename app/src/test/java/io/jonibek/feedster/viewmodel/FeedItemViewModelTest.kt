@@ -5,8 +5,8 @@ import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
 import io.jonibek.feedster.ui.feed.feeditem.FeedItemViewModel
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
+import junit.framework.TestCase.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class FeedItemViewModelTest : BaseViewModelTest() {

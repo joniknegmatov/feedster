@@ -11,7 +11,7 @@ class TestInjector(private val testRemoteDataSourceModule: TestRemoteDataSourceM
         DaggerTestAppComponent
                 .builder()
                 .setTestRemoteDataSourceModule(testRemoteDataSourceModule)
-                .create(app)
+                .build()
                 .inject(app)
     }
 }

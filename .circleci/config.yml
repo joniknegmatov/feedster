@@ -15,9 +15,9 @@ jobs:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-#            - run:
-#               name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-#               command: sudo chmod +x ./gradlew
+      #            - run:
+      #               name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+      #               command: sudo chmod +x ./gradle
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
@@ -25,6 +25,12 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      - run:
+#          name: Sonarqube
+#          command: ./gradlew sonarqube -Dsonar.projectKey=joniknegmatov_feedster -Dsonar.organization=joniknegmatov-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=36c580c5fd3af7a1b5ea25dcc77c0dcb73067694
+      - run:
+          name: Sonarqube
+          command: ./gradlew createDebugCoverageReport jacocoTestReport sonarqube
       - run:
           name: Run Tests
           command: ./gradlew lint test

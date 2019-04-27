@@ -48,13 +48,17 @@ class FeedsFragmentViewModel @Inject constructor(private val feedsUseCase: Feeds
     }
 
     override fun onCleared() {
+        super.onCleared()
         feedsUseCase.clear()
     }
 
+    @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(private val feedsUseCase: FeedsUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return FeedsFragmentViewModel(feedsUseCase) as T
+            if (modelClass.isAssignableFrom(FeedsFragmentViewModel::class.java)) {
+                return FeedsFragmentViewModel(feedsUseCase) as T
+            }
+            throw IllegalArgumentException("You can create only FeedsFragmentViewModel class instance with this factory")
         }
     }
-
 }

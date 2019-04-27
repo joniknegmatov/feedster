@@ -145,9 +145,13 @@ class PostFragmentViewModel(private val postUseCase: PostUseCase) : ObservableVi
         postUseCase.clear()
     }
 
+    @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(private val postUseCase: PostUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return PostFragmentViewModel(postUseCase) as T
+            if (modelClass.isAssignableFrom(PostFragmentViewModel::class.java)) {
+                return PostFragmentViewModel(postUseCase) as T
+            }
+            throw IllegalArgumentException("You can create only PostFragmentViewModel class instance with this factory")
         }
     }
 }

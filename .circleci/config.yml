@@ -28,9 +28,9 @@ jobs:
 #      - run:
 #          name: Sonarqube
 #          command: ./gradlew sonarqube -Dsonar.projectKey=joniknegmatov_feedster -Dsonar.organization=joniknegmatov-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=36c580c5fd3af7a1b5ea25dcc77c0dcb73067694
-      - run:
-          name: Sonarqube
-          command: ./gradlew createDebugCoverageReport jacocoTestReport sonarqube
+#      - run:
+#          name: Sonarqube
+#          command: ./gradlew createDebugCoverageReport jacocoTestReport sonarqube
       - run:
           name: Run Tests
           command: ./gradlew lint test

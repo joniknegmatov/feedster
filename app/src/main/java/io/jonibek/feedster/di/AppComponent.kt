@@ -7,6 +7,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import dagger.android.support.AndroidSupportInjectionModule
 import io.jonibek.feedster.FeedsterApp
+import io.jonibek.feedster.di.data.APIModule
 import io.jonibek.feedster.di.data.LocalDataSourceModule
 import io.jonibek.feedster.di.data.RemoteDataSourceModule
 import io.jonibek.feedster.di.data.RepositoryModule
@@ -17,7 +18,9 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [AndroidSupportInjectionModule::class,
+        MainActivityModule::class,
         AppModule::class,
+        APIModule::class,
         RemoteDataSourceModule::class,
         LocalDataSourceModule::class,
         RepositoryModule::class,

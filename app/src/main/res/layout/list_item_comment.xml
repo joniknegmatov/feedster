@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         style="@style/CardView.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,10 +12,17 @@
         tools:ignore="ContentDescription">
 
     <android.support.constraint.ConstraintLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp">
+
+        <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/ic_heart_outline"
+                android:id="@+id/ivAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
 
         <TextView
                 android:ellipsize="end"
@@ -26,9 +34,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
                 android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"/>
+                app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
                 android:id="@+id/comment_author_email"
@@ -38,10 +45,11 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorSecondaryTextDefaultMaterialLight"
                 app:layout_constraintTop_toBottomOf="@+id/comment_author_name"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivAvatar"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
+                app:layout_constraintStart_toEndOf="@+id/ivAvatar"
                 android:ellipsize="end"
                 android:id="@+id/comment_body_text"
                 android:layout_width="0dp"

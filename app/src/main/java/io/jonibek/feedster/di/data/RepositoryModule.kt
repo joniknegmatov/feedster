@@ -2,33 +2,26 @@ package io.jonibek.feedster.di.data
 
 import dagger.Module
 import dagger.Provides
-import io.jonibek.feedster.data.datasource.comment.CommentRepository
-import io.jonibek.feedster.data.datasource.comment.remote.CommentRemoteDataSource
-import io.jonibek.feedster.data.datasource.post.PostRepository
-import io.jonibek.feedster.data.datasource.post.local.PostLocalDataSource
-import io.jonibek.feedster.data.datasource.post.remote.PostRemoteDataSource
-import io.jonibek.feedster.data.datasource.user.UserRepository
-import io.jonibek.feedster.data.datasource.user.remote.UserRemoteDataSource
+import io.jonibek.feedster.data.repository.comment.CommentRepository
+import io.jonibek.feedster.data.repository.comment.CommentRepositoryImpl
+import io.jonibek.feedster.data.repository.post.PostRepository
+import io.jonibek.feedster.data.repository.post.PostRepositoryImpl
+import io.jonibek.feedster.data.repository.user.UserRepository
+import io.jonibek.feedster.data.repository.user.UserRepositoryImpl
 
 @Module
 class RepositoryModule {
 
     @Provides
-    fun providesPostRepository(
-        postRemoteDataSource: PostRemoteDataSource,
-        postLocalDataSource: PostLocalDataSource
-    ): PostRepository {
-        return PostRepository.PostRepositoryImpl(postRemoteDataSource, postLocalDataSource)
-    }
+    fun providesPostRepository(postRepository: PostRepositoryImpl)
+            : PostRepository = postRepository
 
     @Provides
-    fun providesCommentRepository(commentRemoteDataSource: CommentRemoteDataSource): CommentRepository {
-        return CommentRepository.CommentRepositoryImpl(commentRemoteDataSource)
-    }
+    fun providesCommentRepository(commentRemoteDataSource: CommentRepositoryImpl)
+            : CommentRepository = commentRemoteDataSource
 
     @Provides
-    fun providesUserRepository(userRemoteDataSource: UserRemoteDataSource): UserRepository {
-        return UserRepository.UserRepositoryImpl(userRemoteDataSource)
-    }
+    fun providesUserRepository(userRepository: UserRepositoryImpl)
+            : UserRepository = userRepository
 
 }

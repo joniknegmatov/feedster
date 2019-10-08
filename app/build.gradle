@@ -118,7 +118,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.27.0'
     androidTestImplementation 'org.mockito:mockito-android:2.25.0'
 
-
+    testImplementation 'io.mockk:mockk:1.9.3.kotlin12'
     testImplementation "android.arch.core:core-testing:1.1.1"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'

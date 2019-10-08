@@ -1,7 +1,7 @@
 package io.jonibek.feedster.repository
 
 import io.jonibek.feedster.TestObjects
-import io.jonibek.feedster.data.datasource.user.UserRepository
+import io.jonibek.feedster.data.repository.user.UserRepository
 import io.jonibek.feedster.data.datasource.user.remote.UserRemoteDataSource
 import io.reactivex.Single
 import org.junit.Assert.assertTrue

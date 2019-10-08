@@ -14,7 +14,7 @@ import io.jonibek.feedster.data.datasource.post.remote.PostRemoteDataSource
 import io.jonibek.feedster.data.datasource.user.remote.UserRemoteDataSource
 import io.jonibek.feedster.di.TestInjector
 import io.jonibek.feedster.di.TestRemoteDataSourceModule
-import io.jonibek.feedster.ui.MainActivity
+import io.jonibek.feedster.presentation.MainActivity
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Rule

@@ -1,31 +1,11 @@
 package io.jonibek.feedster.domain.feeditem
 
-import io.jonibek.feedster.data.datasource.post.PostRepository
-import io.jonibek.feedster.domain.internal.BaseUseCase
-import io.jonibek.feedster.domain.internal.BaseUseCaseInterface
-import io.jonibek.feedster.domain.internal.UseCaseCallback
-import io.reactivex.Scheduler
-import javax.inject.Inject
+import io.reactivex.Single
 
-interface FeedItemUseCase : BaseUseCaseInterface {
+interface FeedItemUseCase {
 
-    fun changeFavorite(postId: Int, callback: UseCaseCallback<Boolean>)
+    fun changeFavorite(postId: Int) : Single<Boolean>
 
-    fun isPostFavorite(postId: Int, callback: UseCaseCallback<Boolean>)
+    fun isPostFavorite(postId: Int) : Single<Boolean>
 
-    class FeedItemUseCaseImpl @Inject constructor(
-        private val postRepository: PostRepository,
-        subscribeScheduler: Scheduler,
-        observeScheduler: Scheduler
-    ) : FeedItemUseCase, BaseUseCase(subscribeScheduler, observeScheduler) {
-
-        override fun isPostFavorite(postId: Int, callback: UseCaseCallback<Boolean>) {
-            addDisposable(postRepository.isPostInFavorites(postId), callback)
-        }
-
-        override fun changeFavorite(postId: Int, callback: UseCaseCallback<Boolean>) {
-            addDisposable(postRepository.changeFavorite(postId), callback)
-        }
-
-    }
 }

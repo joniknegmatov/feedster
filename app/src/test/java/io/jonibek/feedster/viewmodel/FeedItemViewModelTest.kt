@@ -4,7 +4,7 @@ import io.jonibek.feedster.TestObjects
 import io.jonibek.feedster.data.entities.Post
 import io.jonibek.feedster.domain.internal.UseCaseCallback
 import io.jonibek.feedster.domain.feeditem.FeedItemUseCase
-import io.jonibek.feedster.ui.feed.feeditem.FeedItemViewModel
+import io.jonibek.feedster.presentation.feed.feeditem.FeedItemViewModel
 import junit.framework.TestCase.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test

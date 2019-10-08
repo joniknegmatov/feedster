@@ -1,7 +1,7 @@
 package io.jonibek.feedster.repository
 
 import io.jonibek.feedster.TestObjects
-import io.jonibek.feedster.data.datasource.post.PostRepository
+import io.jonibek.feedster.data.repository.post.PostRepository
 import io.jonibek.feedster.data.datasource.post.local.PostLocalDataSource
 import io.jonibek.feedster.data.datasource.post.remote.PostRemoteDataSource
 import io.reactivex.Single

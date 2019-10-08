@@ -8,10 +8,14 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-
 class TestObjects {
 
     companion object {
+
+        fun getNumbers() : Map<String,String>{
+            val json = readFromFile("numbers.json")
+            return Gson().fromJson(json, mutableMapOf<String,String>()::class.java)
+        }
 
         fun getPostList(): List<Post> {
             val json = readFromFile("posts.json")

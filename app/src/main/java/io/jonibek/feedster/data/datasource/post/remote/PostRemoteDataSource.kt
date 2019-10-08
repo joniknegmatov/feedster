@@ -12,13 +12,13 @@ interface PostRemoteDataSource {
 
     fun getPostById(postId: Int): Single<Post>
 
-    class PostRemoteDataSourceImpl @Inject constructor(private val postsApi: PostApi) : PostRemoteDataSource {
+    class PostRemoteDataSourceImpl @Inject constructor(private val postsAPI: PostAPI) : PostRemoteDataSource {
 
-        override fun getPostById(postId: Int): Single<Post> = postsApi.getPostById(postId)
+        override fun getPostById(postId: Int): Single<Post> = postsAPI.getPostById(postId)
 
-        override fun getAllPosts() = postsApi.getAllPosts()
+        override fun getAllPosts() = postsAPI.getAllPosts()
 
-        override fun getPostsByUserId(userId: Int) = postsApi.getPostsByUserId(userId)
+        override fun getPostsByUserId(userId: Int) = postsAPI.getPostsByUserId(userId)
 
     }
 }

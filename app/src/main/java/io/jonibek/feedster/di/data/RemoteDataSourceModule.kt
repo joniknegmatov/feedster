@@ -2,29 +2,30 @@ package io.jonibek.feedster.di.data
 
 import dagger.Module
 import dagger.Provides
-import io.jonibek.feedster.data.datasource.comment.remote.CommentApi
 import io.jonibek.feedster.data.datasource.comment.remote.CommentRemoteDataSource
-import io.jonibek.feedster.data.datasource.post.remote.PostApi
+import io.jonibek.feedster.data.datasource.comment.remote.CommentRemoteDataSourceImpl
 import io.jonibek.feedster.data.datasource.post.remote.PostRemoteDataSource
-import io.jonibek.feedster.data.datasource.user.remote.UserApi
 import io.jonibek.feedster.data.datasource.user.remote.UserRemoteDataSource
+import io.jonibek.feedster.data.datasource.user.remote.UserRemoteDataSourceImpl
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 class RemoteDataSourceModule {
 
+    @Singleton
     @Provides
-    fun providesCommentRemoteDataSource(retrofit: Retrofit): CommentRemoteDataSource {
-        return CommentRemoteDataSource.CommentRemoteDataSourceImpl(CommentApi.CommentApiImpl(retrofit))
-    }
+    fun providesCommentRemoteDataSource(commentRemoteDataSource: CommentRemoteDataSourceImpl)
+            : CommentRemoteDataSource = commentRemoteDataSource
 
+    @Singleton
     @Provides
-    fun providesPostRemoteDataSource(retrofit: Retrofit): PostRemoteDataSource {
-        return PostRemoteDataSource.PostRemoteDataSourceImpl(PostApi.PostApiImpl(retrofit))
-    }
+    fun providesPostRemoteDataSource(postRemoteDataSource: PostRemoteDataSource.PostRemoteDataSourceImpl)
+            : PostRemoteDataSource = postRemoteDataSource
 
+    @Singleton
     @Provides
-    fun providesUserRemoteDataSource(retrofit: Retrofit): UserRemoteDataSource {
-        return UserRemoteDataSource.UserRemoteDataSourceImpl(UserApi.UserApiImpl(retrofit))
-    }
+    fun providesUserRemoteDataSource(userRemoteDataSource: UserRemoteDataSourceImpl)
+            : UserRemoteDataSource = userRemoteDataSource
+
 }
